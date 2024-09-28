@@ -166,7 +166,7 @@ return (
           ))}
         </div>
       </main>
-     </div>
+     
   );
 };
 
