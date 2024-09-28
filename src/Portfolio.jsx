@@ -165,10 +165,6 @@ const Portfolio = () => {
           ))}
         </div>
       </main>
-      
-
-  
-  
       <footer className="mt-auto">
         <div className="bg-gradient-to-r from-purple-900 to-black text-white py-8">
           <div className="container mx-auto px-4">
