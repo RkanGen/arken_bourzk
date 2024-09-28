@@ -96,8 +96,7 @@ const projects = [
 
 const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(false);
-
-  return (
+return (
     <div
       className={`min-h-screen flex flex-col ${
         darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
@@ -135,10 +134,11 @@ const Portfolio = () => {
                 darkMode ? "bg-gray-800" : "bg-white"
               }`}
             >
-              <img
+              <LazyImage
                 src={project.image}
                 alt={project.title}
-                className="w-full h-48 object-cover"
+                placeholder="./images/placeholder.png" // Placeholder image
+                darkMode={darkMode}
               />
               <div className="p-4">
                 <h3
@@ -166,7 +166,14 @@ const Portfolio = () => {
           ))}
         </div>
       </main>
+     </div>
+  );
+};
 
+      
+
+  
+  
       <footer className="mt-auto">
         <div className="bg-gradient-to-r from-purple-900 to-black text-white py-8">
           <div className="container mx-auto px-4">
