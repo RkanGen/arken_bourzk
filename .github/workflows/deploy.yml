@@ -1,4 +1,4 @@
-name: Build and Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    outputs:
-      build_path: ${{ steps.build.outputs.build_path }}
 
     steps:
     - name: Checkout repository
@@ -21,26 +19,15 @@ jobs:
         node-version: '16'
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
-    - name: Build the project
-      run: |
-        npm run build
-        echo "::set-output name=build_path::$(pwd)/build"
-      id: build
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Build
+      run: npm run build
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ needs.build.outputs.build_path }}
+        personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        publish_dir: ./dist
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
